@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2023"],
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"types": ["node"],
+		"isolatedModules": true,
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"include": ["vite.config.ts", "tailwind.config.ts", "vitest.config.ts"]
+}

@@ -1,0 +1,238 @@
+.authPage :global(.form-control):focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+}
+
+.authPage :global(.form-control):focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+}
+
+.authPage :global(.form-control) {
+  border: var(--cui-border-width) solid var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+}
+
+.authPage :global(.form-control):hover {
+  border: var(--cui-border-width) solid var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+}
+
+.authPage :global(.form-check-input):focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+.authPage :global(textarea.form-control):focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+.phoneFieldGroup {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.phoneCountryDropdown {
+  flex-shrink: 0;
+}
+
+.phoneCountryToggle {
+  min-width: 130px;
+  min-height: calc(1.5em + 0.75rem + calc(var(--cui-border-width) * 2));
+  padding: 0.375rem 0.75rem;
+  border: var(--cui-border-width) solid var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+  background-color: var(--cui-body-bg) !important;
+  color: var(--cui-body-color) !important;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phoneCountryToggle:hover,
+.phoneCountryToggle:focus,
+.phoneCountryToggle:active,
+.phoneCountryToggle:focus-visible {
+  border-color: var(--cui-input-group-addon-border-color, var(--cui-border-color)) !important;
+  background-color: var(--cui-body-bg) !important;
+  color: var(--cui-body-color) !important;
+  box-shadow: none !important;
+}
+
+.phoneCountryToggle::after {
+  margin-left: 0.75rem;
+}
+
+.phoneCountryToggleInvalid,
+.phoneCountryToggleInvalid:hover,
+.phoneCountryToggleInvalid:focus,
+.phoneCountryToggleInvalid:active,
+.phoneCountryToggleInvalid:focus-visible {
+  border-color: var(--cui-danger) !important;
+}
+
+.phoneCountryMenu {
+  min-width: 100%;
+}
+
+.phoneNumberInput {
+  min-width: 0;
+  flex: 1;
+}
+
+@media (max-width: 479.98px) {
+  .phoneFieldGroup {
+    flex-direction: column;
+  }
+
+  .phoneCountryDropdown,
+  .phoneCountryToggle,
+  .phoneNumberInput,
+  .phoneCountryMenu {
+    width: 100%;
+  }
+
+  .phoneCountryToggle {
+    border-radius: var(--cui-border-radius);
+  }
+}
+
+@media (max-width: 379.98px) {
+  .authPage :global(.form-control) {
+    font-size: 0.875rem;
+  }
+
+  .authPage :global(.form-control::placeholder) {
+    font-size: 0.8125rem;
+  }
+
+  .phoneCountryToggle {
+    font-size: 0.875rem;
+  }
+}
+
+.authPage {
+  padding: 1rem 0;
+}
+
+.loginCardGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loginCard {
+  width: 100%;
+  border-radius: var(--cui-border-radius);
+}
+
+.loginCardBody {
+  padding: 1.25rem;
+}
+
+.registerCardBody {
+  padding: 1.25rem;
+}
+
+.promoCard {
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: var(--cui-border-radius);
+}
+
+.promoCardBody {
+  padding: 1.5rem 1.25rem;
+}
+
+@media (max-width: 479.98px) {
+  .authPage :global(.card) {
+    padding: 1em;
+  }
+
+  .loginCardBody,
+  .registerCardBody {
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .authPage {
+    padding: 1.5rem 0;
+  }
+
+  .loginCardBody {
+    padding: 1.5rem;
+  }
+
+  .registerCardBody {
+    padding: 1.5rem;
+  }
+
+  .promoCard {
+    padding: 1.5rem 0;
+  }
+
+  .promoCardBody {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (min-width: 575px) and (max-width: 991.98px) {
+  .authPage :global(.card-group) > :global(.card) {
+    border-start-start-radius: var(--cui-border-radius);
+    border-start-end-radius: var(--cui-border-radius);
+    border-end-start-radius: var(--cui-border-radius);
+    border-end-end-radius: var(--cui-border-radius);
+  }
+
+  .authPage :global(.card-group) > :global(.card):not(:first-child) {
+    border-start-start-radius: var(--cui-border-radius);
+    border-end-start-radius: var(--cui-border-radius);
+  }
+
+  .loginCard {
+    border-top-left-radius: var(--cui-border-radius);
+    border-top-right-radius: var(--cui-border-radius);
+    border-bottom-left-radius: var(--cui-border-radius);
+    border-bottom-right-radius: var(--cui-border-radius);
+  }
+
+  .promoCard {
+    border-top-left-radius: var(--cui-border-radius);
+    border-top-right-radius: var(--cui-border-radius);
+    border-bottom-left-radius: var(--cui-border-radius);
+    border-bottom-right-radius: var(--cui-border-radius);
+  }
+}
+
+@media (min-width: 992px) {
+  .loginCardGroup {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .authPage :global(.card-group) > :global(.card):not(:first-child) {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
+  .loginCard {
+    width: 56%;
+    border-top-left-radius: var(--cui-border-radius);
+    border-bottom-left-radius: var(--cui-border-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .promoCard {
+    width: 44%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: var(--cui-border-radius);
+    border-bottom-right-radius: var(--cui-border-radius);
+  }
+}

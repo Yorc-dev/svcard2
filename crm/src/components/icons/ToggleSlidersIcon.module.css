@@ -1,0 +1,19 @@
+.toggle-sliders-icon {
+  color: var(--cui-body-color);
+  transition: color 0.2s ease;
+}
+
+/* Light theme */
+[data-coreui-theme="light"] .toggle-sliders-icon {
+  color: var(--cui-dark);
+}
+
+/* Dark theme */
+[data-coreui-theme="dark"] .toggle-sliders-icon {
+  color: var(--cui-light);
+}
+
+/* Hover effect */
+.toggle-sliders-icon:hover {
+  opacity: 0.8;
+}

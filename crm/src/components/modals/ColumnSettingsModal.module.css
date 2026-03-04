@@ -1,0 +1,28 @@
+.column-item {
+  user-select: none;
+  background-color: var(--cui-body-bg);
+}
+
+.column-item:hover {
+  background-color: var(--cui-secondary-bg);
+}
+
+.column-item.dragging {
+  opacity: 0.5;
+  background-color: var(--cui-tertiary-bg);
+}
+
+/* Dark theme support */
+[data-coreui-theme="dark"] .column-item {
+  background-color: var(--cui-dark);
+  border-color: var(--cui-border-color);
+}
+
+[data-coreui-theme="dark"] .column-item:hover {
+  background-color: var(--cui-secondary-bg);
+}
+
+[data-coreui-theme="dark"] .column-item.dragging {
+  background-color: var(--cui-tertiary-bg);
+  opacity: 0.6;
+}

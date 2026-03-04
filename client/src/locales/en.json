@@ -1,0 +1,194 @@
+{
+	"features": "Features",
+	"aboutUs": "About Us",
+	"apply": "Apply",
+	"login": "Login",
+	"register": "Register",
+	"loginRegister": "Login / Register",
+	"logout": "Logout",
+	"footer": {
+		"fuelCardSystem": "Fuel Card Management System",
+		"privacyPolicy": "Privacy Policy",
+		"termsOfUse": "Terms of Use",
+		"developedBy": "Developed by:",
+		"rightsReserved": "© {{year}} SVCard. All rights reserved."
+	},
+	"featuresSection": {
+		"label": "Features",
+		"title": "With Us, Fuel is Under Your Control",
+		"description": "A complete set of tools for efficient control of fuel expenses in your organization",
+		"items": [
+			{
+				"title": "DRIVERS WILL NOT OVERSPEND",
+				"description": "set a limit on the card and monitor expenses in real time"
+			},
+			{
+				"title": "DISCOUNT UP TO 15%",
+				"description": "stable benefit for your business"
+			},
+			{
+				"title": "EXPENSE CONTROL",
+				"description": "detailed statistics and reports on all operations"
+			},
+			{
+				"title": "SIMPLICITY AND TRANSPARENCY",
+				"description": "get a card and use the service without hidden fees and commissions"
+			},
+			{
+				"title": "24/7 SUPPORT",
+				"description": "round-the-clock support service - help at any time"
+			},
+			{
+				"title": "QUICK START",
+				"description": "get a card on the website and start refueling right now"
+			},
+			{
+				"title": "NETWORK GAS STATIONS",
+				"description": "refuel only with quality fuel"
+			},
+			{
+				"title": "VIRTUAL OR PHYSICAL CARD AT YOUR CHOICE",
+				"description": ""
+			}
+		]
+	},
+	"hero": {
+		"headline": {
+			"line1": "SVCard - Multi-brand Fuel Card:",
+			"line2": "refuel with discounts at over 20,000 gas stations in Russia and Kazakhstan"
+		},
+		"subtitle": "Our partners: Tatneft, Lukoil, Rosneft, Gazpromneft, Bashneft, TNK and others.",
+		"buttons": {
+			"apply": "Apply Now",
+			"learnMore": "Learn More"
+		},
+		"stats": [
+			{
+				"value": "15+",
+				"label": "Fuel Suppliers"
+			},
+			{
+				"value": "∞",
+				"label": "Employees per Card"
+			},
+			{
+				"value": "−70%",
+				"label": "Card Expenses"
+			}
+		]
+	},
+	"aboutUsSection": {
+		"label": "About Us",
+		"title": "Why Choose Us",
+		"intro": "Our card provides access to over 20,000 gas stations covering all key routes in Russia and Kazakhstan, while offering stable and fixed fuel discounts.",
+		"systemSection": {
+			"title": "In addition to savings, we provide a comprehensive accounting and control system:",
+			"benefits": [
+				"Detailed analytics, expense control and spending limits for each vehicle",
+				"Transparent transaction history",
+				"Access to all data in one application"
+			]
+		},
+		"conclusion": "We provide a personalized approach to each client, finding solutions tailored to the needs of both large businesses and entrepreneurs of any scale"
+	},
+	"leadForm": {
+		"title": "Submit an Application",
+		"subtitle": "We will contact you to connect to the system",
+		"fields": {
+			"firstName": "First Name",
+			"firstNamePlaceholder": "John",
+			"phone": "Phone",
+			"phonePlaceholder": "+1 (555) 123-4567"
+		},
+		"errors": {
+			"firstName": {
+				"required": "Please enter your first name (at least 2 characters)",
+				"max": "First name is too long"
+			},
+			"phone": {
+				"required": "Please enter your phone number",
+				"max": "Phone number is too long"
+			},
+			"error": "Error",
+			"applicationSendError": "Failed to send application. Please try again later."
+		},
+		"submit": {
+			"send": "Submit Application",
+			"sending": "Sending..."
+		},
+		"success": {
+			"title": "Thank you for your application!",
+			"description": "We will contact you shortly to discuss connecting to the SVCard system"
+		},
+		"agreement": "By clicking the button, you agree to the personal data processing policy",
+		"requiredMark": "*"
+	},
+	"auth": {
+		"title": "Fuel Management System",
+		"subtitle": "Log in or register to access",
+		"tabs": {
+			"login": "Login",
+			"register": "Register"
+		},
+		"login": {
+			"email": "Email",
+			"emailPlaceholder": "example@company.ru",
+			"password": "Password",
+			"passwordPlaceholder": "••••••••",
+			"submit": {
+				"idle": "Log In",
+				"loading": "Logging In..."
+			},
+			"errors": {
+				"email": "Please enter a valid email",
+				"password": "Password must be at least 6 characters"
+			},
+			"errorMessage": "Incorrect email or password",
+			"successTitle": "Login Successful!",
+			"successDescription": "Welcome, {{name}}"
+		},
+		"register": {
+			"fullName": "Full Name",
+			"fullNamePlaceholder": "Ivanov Ivan Ivanovich",
+			"email": "Email",
+			"emailPlaceholder": "example@company.ru",
+			"phone": "Phone",
+			"phonePlaceholder": "+7 (999) 123-45-67",
+			"company": "Company",
+			"companyPlaceholder": "LLC “Your Company”",
+			"password": "Password",
+			"passwordPlaceholder": "At least 6 characters",
+			"confirmPassword": "Confirm Password",
+			"confirmPasswordPlaceholder": "Repeat password",
+			"submit": {
+				"idle": "Register",
+				"loading": "Registering..."
+			},
+			"errors": {
+				"fullName": "Please enter your full name (at least 2 characters)",
+				"email": "Please enter a valid email",
+				"phone": "Please enter your phone number",
+				"company": "Please enter company name",
+				"password": "Password must be at least 6 characters",
+				"confirmPassword": "Passwords do not match"
+			},
+			"agreement": "By clicking the button, you agree to the personal data processing policy",
+			"successDialog": {
+				"title": "Application Submitted!",
+				"description": "Thank you for registering! We will contact you shortly to discuss connection to the SVCard system.",
+				"button": "Return to Home"
+			}
+		},
+		"backButton": "Return to Home"
+	},
+	"notFound": {
+		"title": "404",
+		"message": "Oops! Page not found",
+		"returnHome": "Return to Home"
+	},
+	"countries": {
+		"kz": "Kazakhstan",
+		"kg": "Kyrgyzstan",
+		"ru": "Russia"
+	}
+}

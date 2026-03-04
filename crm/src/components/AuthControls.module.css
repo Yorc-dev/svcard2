@@ -1,0 +1,26 @@
+.authControls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+
+.authControls :global(li) {
+  list-style: none;
+}
+
+.dropdownToggle {
+  transition: transform 0.15s ease-in-out !important;
+  cursor: pointer;
+}
+
+.dropdownToggle:hover {
+  transform: scale(1.15) !important;
+}
+
+.dropdownToggle:focus {
+  transform: scale(1.15) !important;
+  outline: none;
+}

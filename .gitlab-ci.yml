@@ -1,0 +1,134 @@
+stages:
+  - build
+  - deploy
+
+backend_dev:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:backend_dev
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull --network host -t $IMAGE_TAG ./backend
+    - docker push $IMAGE_TAG
+  only:
+    refs:
+      - dev
+    changes:
+      - backend/**/*
+
+client_frontend_dev:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:client_dev
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    # - cp $DEV_ENV_FILE ./client/.env
+    - docker build --build-arg NODE_ENV=development --pull --network host -t $IMAGE_TAG ./client
+    - docker push $IMAGE_TAG
+  only:
+    refs:
+      - dev
+    changes:
+      - 'client/**/*'
+
+crm_frontend_dev:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:crm_dev
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - cp $DEV_CRM_ENV_FILE ./crm/.env
+    - docker build --build-arg NODE_ENV=development --pull --network host -t $IMAGE_TAG ./crm
+    - docker push $IMAGE_TAG
+  only:
+    refs:
+      - dev
+    changes:
+      - 'crm/**/*'
+
+deploy_dev:
+  image: ubuntu:22.04
+  stage: deploy
+  services:
+    - docker:dind
+  before_script:
+    - apt-get update -qq
+    - apt-get install -qq git
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh $DEV_USER@$DEV_HOST "cd /opt/svcard && docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY && docker-compose pull && docker-compose down && docker-compose up -d && docker image prune -f && exit"
+  only:
+    - dev
+
+# backend_prod:
+#   image: docker:latest
+#   stage: build
+#   services:
+#     - docker:dind
+#   variables:
+#     IMAGE_TAG: $CI_REGISTRY_IMAGE:backend_prod
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker build --pull --network host -t $IMAGE_TAG ./backend
+#     - docker push $IMAGE_TAG
+#   only:
+#     refs:
+#       - main
+#     changes:
+#       - backend/**/*
+
+# client_frontend_prod:
+#   # Official docker image.
+#   image: docker:latest
+#   stage: build
+#   services:
+#     - docker:dind
+#   variables:
+#     IMAGE_TAG: $CI_REGISTRY_IMAGE:client_prod
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - cp $PROD_ENV_FILE ./client/.env
+#     - docker build --pull --network host -t $IMAGE_TAG ./client
+#     - docker push $IMAGE_TAG
+#   only:
+#     refs:
+#       - main
+#     changes:
+#       - "client/**/*"
+
+# crm_frontend_prod:
+#   # Official docker image.
+#   image: docker:latest
+#   stage: build
+#   services:
+#     - docker:dind
+#   variables:
+#     IMAGE_TAG: $CI_REGISTRY_IMAGE:crm_prod
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker build --pull --build-arg ASSET_PATH=$PROD_ASSET_PATH --network host -t $IMAGE_TAG ./crm
+#     - docker push $IMAGE_TAG
+#   only:
+#     refs:
+#       - main
+#     changes:
+#       - "crm/**/*"

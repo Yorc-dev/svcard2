@@ -1,0 +1,34 @@
+#DO NOT USE FOR PRODUCTION
+services:
+  backend:
+    build: .
+    container_name: backend
+    entrypoint: [./entrypoint.sh]
+    env_file:
+      - ./app/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:17
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: nikitagrebnev
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: svcard_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nikitagrebnev -d svcard_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
