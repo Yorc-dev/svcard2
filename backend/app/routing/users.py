@@ -11,7 +11,7 @@ from app.schemas.users import UserRegister, UserLogin, TokenResponse, User
 from app.core.deps import get_current_user
 from app.models.users import Users
 from app.utils.permissions import require_moderator_or_admin
-from app.i18n.i18n import get_locale
+from app.i18n.i18n import get_locale, t
 
 router = APIRouter(prefix="/users", tags=["Auth"])
 
@@ -57,22 +57,22 @@ async def list_users(
 @router.get("/{user_id}", response_model=User)
 async def get_user_detail(
     user_id: int,
+    locale: Annotated[str, Depends(get_locale)],
     service: UserService = Depends(get_user_service),
     _: None = Depends(require_moderator_or_admin)
-    # current_user: Users = Depends(get_current_user),
 ):
-    try:
-        user = await service.get_user(user_id)
-    except ValueError:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    return user
+    return await service.get_user(user_id, locale)
 
 @router.get("/confirm/{code}")
-async def confirm_user(activation_code: str, service: UserService = Depends(get_user_service)):
+async def confirm_user(
+    activation_code: str,
+    locale: Annotated[str, Depends(get_locale)],
+    service: UserService = Depends(get_user_service)
+):
     success = await service.confirm_user(activation_code)
     if not success:
-        raise HTTPException(status_code=400, detail="Invalid activation code")
-    return {"detail": "User activated!"}
+        raise HTTPException(status_code=400, detail=t("auth.invalid_activation_code", locale))
+    return {"detail": t("auth.user_activated", locale)}
 
 
 # тестово, переделать на норм архитектуру
@@ -87,6 +87,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 @router.post("/logout")
 async def logout(
+    locale: Annotated[str, Depends(get_locale)],
     token: str = Depends(oauth2_scheme),
     db: AsyncSession = Depends(get_db)
 ):
@@ -94,4 +95,4 @@ async def logout(
     db.add(blacklisted)
     await db.commit()
 
-    return {"message": "Successfully logged out"}
+    return {"message": t("auth.logout_success", locale)}

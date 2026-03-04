@@ -39,7 +39,14 @@
     "unauthorized": "Unauthorized access",
     "forbidden": "Access forbidden",
     "google_auth_failed": "Google authentication failed",
-    "invalid_token": "Given token invalid"
+    "invalid_token": "Given token invalid",
+    "invalid_activation_code": "Invalid activation code",
+    "user_activated": "User activated successfully"
+  },
+  "permissions": {
+    "admin_required": "Admin privileges required",
+    "moderator_required": "Moderator privileges required",
+    "moderator_or_admin_required": "Moderator or Admin privileges required"
   },
   "errors": {
     "user_not_found": "User not found",
