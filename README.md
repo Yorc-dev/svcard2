@@ -1,8 +1,56 @@
-# Petrol
+# svcard2 / Petrol
+
+## Multilingual API (i18n)
+
+The backend supports three languages: **Russian** (`ru`), **Kyrgyz** (`ky`), and **English** (`en`).
+The default language is **Russian**.
+
+### Locale selection priority
+
+1. `lang` query parameter — e.g. `?lang=en`
+2. `Accept-Language` request header
+3. Fallback: `ru`
+
+### Examples
+
+```bash
+# Russian (default)
+curl -X POST http://localhost:8000/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"wrong"}'
+# → {"detail":"Неверный email или пароль"}
+
+# English via query parameter
+curl -X POST "http://localhost:8000/users/login?lang=en" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"wrong"}'
+# → {"detail":"Invalid email or password"}
+
+# Kyrgyz via query parameter
+curl -X POST "http://localhost:8000/users/login?lang=ky" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"wrong"}'
+# → {"detail":"Электрондук почта же сырсөз туура эмес"}
+
+# English via Accept-Language header
+curl -X POST http://localhost:8000/users/login \
+  -H "Content-Type: application/json" \
+  -H "Accept-Language: en" \
+  -d '{"email":"user@example.com","password":"wrong"}'
+# → {"detail":"Invalid email or password"}
+
+# Unsupported language falls back to Russian
+curl -X POST "http://localhost:8000/users/login?lang=fr" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"wrong"}'
+# → {"detail":"Неверный email или пароль"}
+```
+
+Translation files live in `backend/app/locales/` (`en.json`, `ru.json`, `ky.json`).
+
+---
 
 
-
-## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 

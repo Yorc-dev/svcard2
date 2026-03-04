@@ -1,13 +1,13 @@
 """
 Internationalization (i18n) Module for SeoLinkX Backend
-Provides multi-language support with locale detection from headers
+Provides multi-language support with locale detection from query param and headers
 """
 import json
 import structlog
 from pathlib import Path
 from typing import Annotated, Dict, Optional, Any
 from functools import lru_cache
-from fastapi import Header, Request
+from fastapi import Header, Query, Request
 
 
 
@@ -16,15 +16,11 @@ logger = structlog.get_logger()
 class I18n:
     """Internationalization handler"""
 
-    def __init__(self, locales_dir: str = "locales", default_locale: str = "en"):
+    def __init__(self, locales_dir: str = "locales", default_locale: str = "ru"):
         self.locales_dir = Path(__file__).parent.parent / locales_dir        
         self.default_locale = default_locale
         self.translations: Dict[str, Dict[str, Any]] = {}
         self._load_translations()
-
-        print("Locales dir:", self.locales_dir)
-        print("Exists:", self.locales_dir.exists())
-        print("Loaded locales:", self.translations.keys())
 
     def _load_translations(self) -> None:
         """Load all translation files from the locales directory"""
@@ -166,28 +162,25 @@ def translate(key: str, locale: Optional[str] = None, **kwargs) -> str:
     return i18n.t(key, locale, **kwargs)
 
 async def get_locale(
-    x_locale: Annotated[Optional[str], Header(alias="X-Locale")] = None,
+    lang: Annotated[Optional[str], Query()] = None,
     accept_language: Annotated[Optional[str], Header(alias="Accept-Language")] = None
 ) -> str:
     """
     FastAPI dependency to extract locale with priority:
-    1. X-Locale header (user's explicit choice from frontend)
+    1. Query parameter ``lang`` (ky, ru, en)
     2. Accept-Language header (browser default)
-    3. Default locale (en)
+    3. Default locale (ru)
 
     Usage:
         @app.get("/endpoint")
         async def endpoint(locale: str = Depends(get_locale)):
             return {"message": t("welcome", locale)}
-    
-    Frontend should send:
-        headers: { "X-Locale": "ru" }  // User's choice from language switcher
     """
-    # Priority 1: Explicit locale from frontend (language switcher)
-    if x_locale and x_locale.lower() in i18n.get_available_locales():
-        return x_locale.lower()
-    
-    # Priority 2: Accept-Language header
+    # Priority 1: Explicit lang query parameter
+    if lang and lang.lower() in i18n.get_available_locales():
+        return lang.lower()
+
+    # Priority 2: Accept-Language header, fallback to default (ru)
     return get_locale_from_header(accept_language)
 
 
@@ -200,11 +193,11 @@ async def get_request_locale(request: Request) -> str:
         async def endpoint(locale: str = Depends(get_request_locale)):
             return {"message": t("welcome", locale)}
     """
-    # Priority 1: X-Locale header
-    x_locale = request.headers.get("X-Locale")
-    if x_locale and x_locale.lower() in i18n.get_available_locales():
-        return x_locale.lower()
-    
+    # Priority 1: lang query parameter
+    lang = request.query_params.get("lang")
+    if lang and lang.lower() in i18n.get_available_locales():
+        return lang.lower()
+
     # Priority 2: Accept-Language header
     accept_language = request.headers.get("Accept-Language")
     return get_locale_from_header(accept_language)

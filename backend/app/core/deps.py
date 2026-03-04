@@ -24,11 +24,11 @@ async def get_current_user(
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email = payload.get("sub")
     except JWTError:
-        raise HTTPException(status_code=401, detail=t("auth.invalid_token"))
+        raise HTTPException(status_code=401, detail=t("auth.invalid_token", locale))
 
     repo = UserRepository(session)
     user = await repo.get_by_email(email)
     if not user:
-        raise HTTPException(status_code=401, detail="errors.user_not_found")
+        raise HTTPException(status_code=401, detail=t("errors.user_not_found", locale))
 
     return user

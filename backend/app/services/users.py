@@ -1,12 +1,12 @@
-from fastapi import HTTPException, status, Depends
+from fastapi import HTTPException, status
 
-from typing import List, Annotated
+from typing import List
 
 from app.repositories.users import UserRepository
 from app.utils.jwt import hash_password, verify_password, create_access_token
 from app.utils.email import send_activation_email
 from app.models.users import Users
-from app.i18n.i18n import t, get_locale
+from app.i18n.i18n import t
 
 class UserService:
 
@@ -20,7 +20,7 @@ class UserService:
             password: str, 
             tin: str, 
             phone_number: str,
-            locale: Annotated[str, Depends(get_locale)],
+            locale: str,
             ):
         existing_user = await self.repository.get_by_email(email)
         existing_tin = await self.repository.get_by_tin(tin)
@@ -48,7 +48,7 @@ class UserService:
             self, 
             email: str, 
             password: str,
-            locale: Annotated[str, Depends(get_locale)],
+            locale: str,
             ):
         user = await self.repository.get_by_email(email)
         if not user or not verify_password(password, user.password):
@@ -64,7 +64,7 @@ class UserService:
     async def get_user(
         self, 
         user_id: int,
-        locale: Annotated[str, Depends(get_locale)],
+        locale: str,
         ) -> Users:
         user = await self.repository.get_by_id(user_id)
         if not user:

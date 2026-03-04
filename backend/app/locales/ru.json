@@ -37,8 +37,14 @@
     "token_expired": "Сессия истекла, войдите снова",
     "unauthorized": "Неавторизованный доступ",
     "forbidden": "Доступ запрещен",
-    "invalid_token": "Данный токен невалиден"
-
+    "invalid_token": "Данный токен невалиден",
+    "invalid_activation_code": "Неверный код активации",
+    "user_activated": "Пользователь успешно активирован"
+  },
+  "permissions": {
+    "admin_required": "Требуются права администратора",
+    "moderator_required": "Требуются права модератора",
+    "moderator_or_admin_required": "Требуются права модератора или администратора"
   },
   "errors": {
     "user_not_found": "Пользователь не найден",

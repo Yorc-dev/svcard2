@@ -37,8 +37,14 @@
     "token_expired": "Сессия бүттү, кайра кирүү керек",
     "unauthorized": "Авторизация жок",
     "forbidden": "Кирүү тыюу салынган",
-    "invalid_token": "Берилген токен жараксыз"
-
+    "invalid_token": "Берилген токен жараксыз",
+    "invalid_activation_code": "Активация коду туура эмес",
+    "user_activated": "Колдонуучу ийгиликтүү активдештирилди"
+  },
+  "permissions": {
+    "admin_required": "Администратор укуктары талап кылынат",
+    "moderator_required": "Модератор укуктары талап кылынат",
+    "moderator_or_admin_required": "Модератор же администратор укуктары талап кылынат"
   },
   "errors": {
     "user_not_found": "Колдонуучу табылган жок",
