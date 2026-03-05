@@ -5,6 +5,9 @@ from starlette.requests import Request
 from app.core.db import engine, AsyncSessionLocal
 from app.models.users import Users
 from app.models.applications import Application
+from app.models.organizations import Organization
+from app.models.suppliers import Supplier
+from app.models.loyalty_cards import LoyaltyCard
 from app.repositories.users import UserRepository
 from app.utils.choices import RoleChoices
 from app.utils.jwt import verify_password
@@ -74,6 +77,33 @@ class ApplicationAdmin(ModelView, model=Application):
     icon = "fa-solid fa-file"
 
 
+class OrganizationAdmin(ModelView, model=Organization):
+    column_list = [Organization.id, Organization.name, Organization.inn, Organization.is_active, Organization.created_at]
+    column_searchable_list = [Organization.name, Organization.inn]
+    column_sortable_list = [Organization.id, Organization.name, Organization.is_active]
+    name = "Organization"
+    name_plural = "Organizations"
+    icon = "fa-solid fa-building"
+
+
+class SupplierAdmin(ModelView, model=Supplier):
+    column_list = [Supplier.id, Supplier.name, Supplier.contract_number, Supplier.discount]
+    column_searchable_list = [Supplier.name, Supplier.contract_number]
+    column_sortable_list = [Supplier.id, Supplier.name]
+    name = "Supplier"
+    name_plural = "Suppliers"
+    icon = "fa-solid fa-truck"
+
+
+class LoyaltyCardAdmin(ModelView, model=LoyaltyCard):
+    column_list = [LoyaltyCard.id, LoyaltyCard.card_number, LoyaltyCard.balance, LoyaltyCard.status, LoyaltyCard.created_at]
+    column_searchable_list = [LoyaltyCard.card_number]
+    column_sortable_list = [LoyaltyCard.id, LoyaltyCard.card_number, LoyaltyCard.status]
+    name = "Loyalty Card"
+    name_plural = "Loyalty Cards"
+    icon = "fa-solid fa-credit-card"
+
+
 def create_admin(app) -> Admin:
     admin_secret = config("ADMIN_SECRET_KEY", default=config("SECRET_KEY"))
     authentication_backend = AdminAuth(secret_key=admin_secret)
@@ -85,4 +115,7 @@ def create_admin(app) -> Admin:
     )
     admin.add_view(UsersAdmin)
     admin.add_view(ApplicationAdmin)
+    admin.add_view(OrganizationAdmin)
+    admin.add_view(SupplierAdmin)
+    admin.add_view(LoyaltyCardAdmin)
     return admin

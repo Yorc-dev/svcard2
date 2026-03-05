@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from sqlalchemy import Integer, String
 
@@ -30,5 +30,5 @@ class Users(Base):
     role: Mapped[RoleChoices] = mapped_column(default="user")
     password: Mapped[str] = mapped_column(nullable=False)
     activation_code: Mapped[str] = mapped_column(String(100), nullable=True)
-    
-    
+
+    organization = relationship("Organization", back_populates="user", uselist=False)

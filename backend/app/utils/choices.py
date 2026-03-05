@@ -11,4 +11,10 @@ class RoleChoices(str, Enum):
     MODERATOR = "moderator"
     USER = "user"
     EMPLOYEE = "employee"
+
+
+class LoyaltyCardStatus(str, Enum):
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    BLOCKED = "blocked"
     
