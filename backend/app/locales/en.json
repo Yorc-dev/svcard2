@@ -33,6 +33,7 @@
     "invalid_credentials": "Invalid email or password",
     "tin_exists": "A user with this TIN already exists",
     "email_exists": "Email already exists",
+    "phone_exists": "A user with this phone number already exists",
     "password_mismatch": "Passwords do not match",
     "weak_password": "Password is too weak",
     "token_expired": "Session expired, please login again",
@@ -74,5 +75,32 @@
     "pattern_mismatch": "Value does not match required pattern",
     "unique": "This value must be unique",
     "exists": "This value does not exist"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "language_switcher": "Language",
+    "users": "Users",
+    "applications": "Applications",
+    "organizations": "Organizations",
+    "suppliers": "Suppliers",
+    "loyalty_cards": "Loyalty Cards",
+    "create_user": "Create User",
+    "edit_user": "Edit User",
+    "password_confirm": "Confirm Password",
+    "password_min_length": "Password must be at least 8 characters",
+    "passwords_mismatch": "Passwords do not match",
+    "invalid_email": "Invalid email format",
+    "tin_digits_only": "TIN must contain digits only",
+    "tin_length": "TIN must be exactly 14 digits",
+    "email_exists": "A user with this email already exists",
+    "tin_exists": "A user with this TIN already exists",
+    "phone_exists": "A user with this phone number already exists",
+    "org_legal_only": "An organization can only be created for a user with legal status 'Legal Entity'",
+    "org_inn_exists": "An organization with this INN already exists",
+    "save_error": "Save error",
+    "delete_error": "Delete error"
+  },
+  "organizations": {
+    "legal_entity_required": "Organization can only be created for users with 'Legal Entity' status"
   }
 }

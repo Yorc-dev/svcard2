@@ -32,3 +32,8 @@ class Users(Base):
     activation_code: Mapped[str] = mapped_column(String(100), nullable=True)
 
     organization = relationship("Organization", back_populates="user", uselist=False)
+
+    def __str__(self) -> str:
+        if self.full_name:
+            return f"{self.full_name} <{self.email}>"
+        return self.email

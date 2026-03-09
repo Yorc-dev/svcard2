@@ -28,6 +28,15 @@ class UserRegister(BaseModel):
 
         return value
 
+    @field_validator("tin")
+    @classmethod
+    def validate_tin(cls, value: str):
+        if value and not value.isdigit():
+            raise ValueError("TIN must contain digits only")
+        if value and len(value) != 14:
+            raise ValueError("TIN must be exactly 14 digits")
+        return value
+
 
 class UserLogin(BaseModel):
     email: EmailStr

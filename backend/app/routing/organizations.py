@@ -35,7 +35,7 @@ async def update_my_organization(
     current_user: Users = Depends(get_current_user),
     service: OrganizationService = Depends(get_org_service),
 ):
-    return await service.update_organization(current_user.id, data, locale)
+    return await service.update_organization(current_user.id, data, locale, current_user=current_user)
 
 
 @router.patch("/me", response_model=OrganizationRead)
@@ -45,4 +45,4 @@ async def patch_my_organization(
     current_user: Users = Depends(get_current_user),
     service: OrganizationService = Depends(get_org_service),
 ):
-    return await service.update_organization(current_user.id, data, locale)
+    return await service.update_organization(current_user.id, data, locale, current_user=current_user)

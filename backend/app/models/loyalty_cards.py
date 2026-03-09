@@ -20,3 +20,6 @@ class LoyaltyCard(Base):
 
     supplier = relationship("Supplier", back_populates="loyalty_cards")
     organization = relationship("Organization", back_populates="loyalty_cards")
+
+    def __str__(self) -> str:
+        return self.card_number or f"LoyaltyCard #{self.id}"
