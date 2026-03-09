@@ -13,3 +13,6 @@ class Supplier(Base):
     discount: Mapped[float] = mapped_column(Numeric(5, 2), default=0.0, server_default="0.00", nullable=True)
 
     loyalty_cards = relationship("LoyaltyCard", back_populates="supplier")
+
+    def __str__(self) -> str:
+        return self.name or f"Supplier #{self.id}"

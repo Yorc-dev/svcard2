@@ -2,8 +2,10 @@ from fastapi import HTTPException, status
 from typing import Optional
 
 from app.repositories.organizations import OrganizationRepository
+from app.repositories.users import UserRepository
 from app.models.organizations import Organization
 from app.schemas.organizations import OrganizationCreate, OrganizationUpdate
+from app.utils.choices import LegalStatusChoices
 from app.i18n.i18n import t
 
 
@@ -25,7 +27,14 @@ class OrganizationService:
         user_id: int,
         data: OrganizationUpdate,
         locale: str,
+        current_user=None,
     ) -> Organization:
+        # Enforce: only legal entity users may have an organization
+        if current_user is not None and current_user.legal_status != LegalStatusChoices.LEGAL_ENTITY:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=t("organizations.legal_entity_required", locale),
+            )
         org = await self.repository.get_by_user_id(user_id)
         if not org:
             raise HTTPException(
